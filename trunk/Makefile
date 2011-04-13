@@ -147,6 +147,7 @@ UPROGS=\
 	_threadTest\
 	_sheker\
 	_roses\
+	_my_test\
 
 CONFIGFILES=\
 	configuration.conf\

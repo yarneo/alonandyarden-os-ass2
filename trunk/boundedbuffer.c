@@ -90,3 +90,11 @@ void* semaphore_pop(struct BB* bb)
 	sem_up(bb->empty);
 	return element;
 }
+
+void semaphore_clear(struct BB* bb) {
+	free(bb->buffer);
+	sem_clear(bb->empty);
+	sem_clear(bb->full);
+	binary_sem_clear(bb->mutex);
+	free(bb);
+}

@@ -75,7 +75,7 @@ struct proc {
 	volatile int tid;
 	struct proc *joinedthread;
 	void* ret_val;
-	int thread_count;
+// 	int thread_count;
 };
 // Process memory is laid out contiguously, low addresses first:
 //   text

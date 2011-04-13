@@ -22,7 +22,7 @@
 #define SYS_uptime 21
 #define SYS_thread_create 22
 #define SYS_thread_getid 23
-#define SYS_thread_getProcid 24
+#define SYS_thread_getProcId 24
 #define SYS_thread_join 25
 #define SYS_thread_exit 26
 #define SYS_binary_sem_create 27
