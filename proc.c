@@ -346,14 +346,15 @@ exit(void)
 
 	for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
 	if((p->parent == proc) && (p->tid != -1)){
+		//cprintf("no reason\n");
 		for(fd = 0; fd < NOFILE; fd++){
 			if(proc->ofile[fd]){
 				proc->ofile[fd] = 0;
 			}
-			}
+		}
 			p->cwd = 0;
 			p->state = ZOMBIE;
-		}
+	}
   	}
 	/////////////
 	proc->cwd = 0;
@@ -483,6 +484,7 @@ thread_exit(void* ret_val) {
         panic("init thread exiting");
     }
     if (proc->tid == -1) {
+	//cprintf("no reason to be here\n");
         exit();
     }
 
@@ -524,8 +526,10 @@ wait(void) {
 
             //cprintf("tid: %d, thread_count of parent: %d",p->tid,proc->thread_count);
             if ((p->state == ZOMBIE) && (p->thread_count == 0)) {
+		//cprintf("here?\n");
                 for (np = ptable.proc; np < &ptable.proc[NPROC]; np++) {
                     if ((np->pid == p->pid) && (p != np)) {
+			cprintf("you suck\n");
                         pid = np->pid;
                         kfree(np->kstack);
                         np->kstack = 0;
@@ -541,10 +545,23 @@ wait(void) {
                     }
                 }
                 // Found one.
+                pid = p->pid;
+                kfree(p->kstack);
+                p->kstack = 0;
+                p->state = UNUSED;
+                p->pid = 0;
+                p->tid = 0;
+                p->thread_count = -1;
+                p->ret_val = 0;
+                p->parent = 0;
+                p->name[0] = 0;
+                p->killed = 0;
+                p->joinedthread = 0;
                 freevm(p->pgdir);
                 release(&ptable.lock);
                 return pid;
             } else if (p->state == ZOMBIE) {
+		//cprintf("or here?\n");
                 pid = p->pid;
                 kfree(p->kstack);
                 p->kstack = 0;
@@ -588,7 +605,7 @@ thread_join(int thread_id, void** ret_val) {
         for (p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
             if (p->tid != thread_id) {// || ((p->parent != proc) && (p->parent != proc->parent))) {
                 continue;
-            } else
+            } //else
                 //cprintf("nice one\n");
 
                 if (p->joinedthread == 0) {

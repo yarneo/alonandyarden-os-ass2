@@ -682,186 +682,151 @@ gets(char *buf, int max)
  32f:	90                   	nop
 
 00000330 <fork>:
-  name: \
-    movl $SYS_ ## name, %eax; \
-    int $T_SYSCALL; \
-    ret
-
-SYSCALL(fork)
  330:	b8 01 00 00 00       	mov    $0x1,%eax
  335:	cd 40                	int    $0x40
  337:	c3                   	ret    
 
 00000338 <exit>:
-SYSCALL(exit)
  338:	b8 02 00 00 00       	mov    $0x2,%eax
  33d:	cd 40                	int    $0x40
  33f:	c3                   	ret    
 
 00000340 <wait>:
-SYSCALL(wait)
  340:	b8 03 00 00 00       	mov    $0x3,%eax
  345:	cd 40                	int    $0x40
  347:	c3                   	ret    
 
 00000348 <pipe>:
-SYSCALL(pipe)
  348:	b8 04 00 00 00       	mov    $0x4,%eax
  34d:	cd 40                	int    $0x40
  34f:	c3                   	ret    
 
 00000350 <read>:
-SYSCALL(read)
  350:	b8 06 00 00 00       	mov    $0x6,%eax
  355:	cd 40                	int    $0x40
  357:	c3                   	ret    
 
 00000358 <write>:
-SYSCALL(write)
  358:	b8 05 00 00 00       	mov    $0x5,%eax
  35d:	cd 40                	int    $0x40
  35f:	c3                   	ret    
 
 00000360 <close>:
-SYSCALL(close)
  360:	b8 07 00 00 00       	mov    $0x7,%eax
  365:	cd 40                	int    $0x40
  367:	c3                   	ret    
 
 00000368 <kill>:
-SYSCALL(kill)
  368:	b8 08 00 00 00       	mov    $0x8,%eax
  36d:	cd 40                	int    $0x40
  36f:	c3                   	ret    
 
 00000370 <exec>:
-SYSCALL(exec)
  370:	b8 09 00 00 00       	mov    $0x9,%eax
  375:	cd 40                	int    $0x40
  377:	c3                   	ret    
 
 00000378 <open>:
-SYSCALL(open)
  378:	b8 0a 00 00 00       	mov    $0xa,%eax
  37d:	cd 40                	int    $0x40
  37f:	c3                   	ret    
 
 00000380 <mknod>:
-SYSCALL(mknod)
  380:	b8 0b 00 00 00       	mov    $0xb,%eax
  385:	cd 40                	int    $0x40
  387:	c3                   	ret    
 
 00000388 <unlink>:
-SYSCALL(unlink)
  388:	b8 0c 00 00 00       	mov    $0xc,%eax
  38d:	cd 40                	int    $0x40
  38f:	c3                   	ret    
 
 00000390 <fstat>:
-SYSCALL(fstat)
  390:	b8 0d 00 00 00       	mov    $0xd,%eax
  395:	cd 40                	int    $0x40
  397:	c3                   	ret    
 
 00000398 <link>:
-SYSCALL(link)
  398:	b8 0e 00 00 00       	mov    $0xe,%eax
  39d:	cd 40                	int    $0x40
  39f:	c3                   	ret    
 
 000003a0 <mkdir>:
-SYSCALL(mkdir)
  3a0:	b8 0f 00 00 00       	mov    $0xf,%eax
  3a5:	cd 40                	int    $0x40
  3a7:	c3                   	ret    
 
 000003a8 <chdir>:
-SYSCALL(chdir)
  3a8:	b8 10 00 00 00       	mov    $0x10,%eax
  3ad:	cd 40                	int    $0x40
  3af:	c3                   	ret    
 
 000003b0 <dup>:
-SYSCALL(dup)
  3b0:	b8 11 00 00 00       	mov    $0x11,%eax
  3b5:	cd 40                	int    $0x40
  3b7:	c3                   	ret    
 
 000003b8 <getpid>:
-SYSCALL(getpid)
  3b8:	b8 12 00 00 00       	mov    $0x12,%eax
  3bd:	cd 40                	int    $0x40
  3bf:	c3                   	ret    
 
 000003c0 <sbrk>:
-SYSCALL(sbrk)
  3c0:	b8 13 00 00 00       	mov    $0x13,%eax
  3c5:	cd 40                	int    $0x40
  3c7:	c3                   	ret    
 
 000003c8 <sleep>:
-SYSCALL(sleep)
  3c8:	b8 14 00 00 00       	mov    $0x14,%eax
  3cd:	cd 40                	int    $0x40
  3cf:	c3                   	ret    
 
 000003d0 <uptime>:
-SYSCALL(uptime)
  3d0:	b8 15 00 00 00       	mov    $0x15,%eax
  3d5:	cd 40                	int    $0x40
  3d7:	c3                   	ret    
 
 000003d8 <thread_create>:
-SYSCALL(thread_create)
  3d8:	b8 16 00 00 00       	mov    $0x16,%eax
  3dd:	cd 40                	int    $0x40
  3df:	c3                   	ret    
 
 000003e0 <thread_getid>:
-SYSCALL(thread_getid)
  3e0:	b8 17 00 00 00       	mov    $0x17,%eax
  3e5:	cd 40                	int    $0x40
  3e7:	c3                   	ret    
 
 000003e8 <thread_getProcid>:
-SYSCALL(thread_getProcid)
  3e8:	b8 18 00 00 00       	mov    $0x18,%eax
  3ed:	cd 40                	int    $0x40
  3ef:	c3                   	ret    
 
 000003f0 <thread_exit>:
-SYSCALL(thread_exit)
  3f0:	b8 1a 00 00 00       	mov    $0x1a,%eax
  3f5:	cd 40                	int    $0x40
  3f7:	c3                   	ret    
 
 000003f8 <thread_join>:
-SYSCALL(thread_join)
  3f8:	b8 19 00 00 00       	mov    $0x19,%eax
  3fd:	cd 40                	int    $0x40
  3ff:	c3                   	ret    
 
 00000400 <binary_sem_create>:
-SYSCALL(binary_sem_create)
  400:	b8 1b 00 00 00       	mov    $0x1b,%eax
  405:	cd 40                	int    $0x40
  407:	c3                   	ret    
 
 00000408 <binary_sem_down>:
-SYSCALL(binary_sem_down)
  408:	b8 1c 00 00 00       	mov    $0x1c,%eax
  40d:	cd 40                	int    $0x40
  40f:	c3                   	ret    
 
 00000410 <binary_sem_up>:
-SYSCALL(binary_sem_up)
  410:	b8 1d 00 00 00       	mov    $0x1d,%eax
  415:	cd 40                	int    $0x40
  417:	c3                   	ret    
 
 00000418 <binary_sem_clear>:
-SYSCALL(binary_sem_clear)
  418:	b8 1e 00 00 00       	mov    $0x1e,%eax
  41d:	cd 40                	int    $0x40
  41f:	c3                   	ret    
@@ -1683,47 +1648,25 @@ morecore(uint nu)
  84f:	90                   	nop
 
 00000850 <sem_clear>:
-	}
-	binary_sem_up(sem->S1);
-}
-
-void sem_clear(struct semaphore* sem )
-{
  850:	55                   	push   %ebp
  851:	89 e5                	mov    %esp,%ebp
  853:	53                   	push   %ebx
  854:	83 ec 14             	sub    $0x14,%esp
  857:	8b 5d 08             	mov    0x8(%ebp),%ebx
-	binary_sem_clear(sem->S1);
  85a:	8b 03                	mov    (%ebx),%eax
  85c:	89 04 24             	mov    %eax,(%esp)
  85f:	e8 b4 fb ff ff       	call   418 <binary_sem_clear>
-	binary_sem_clear(sem->S2);
  864:	8b 43 04             	mov    0x4(%ebx),%eax
  867:	89 04 24             	mov    %eax,(%esp)
  86a:	e8 a9 fb ff ff       	call   418 <binary_sem_clear>
-	free(sem);
  86f:	89 5d 08             	mov    %ebx,0x8(%ebp)
-}
  872:	83 c4 14             	add    $0x14,%esp
  875:	5b                   	pop    %ebx
  876:	5d                   	pop    %ebp
-
-void sem_clear(struct semaphore* sem )
-{
-	binary_sem_clear(sem->S1);
-	binary_sem_clear(sem->S2);
-	free(sem);
  877:	e9 64 fe ff ff       	jmp    6e0 <free>
  87c:	8d 74 26 00          	lea    0x0(%esi,%eiz,1),%esi
 
 00000880 <sem_downs>:
-	}
-	binary_sem_up(sem->S1);
-}
-
-void sem_downs(struct semaphore* sem, int num )
-{
  880:	55                   	push   %ebp
  881:	89 e5                	mov    %esp,%ebp
  883:	83 ec 18             	sub    $0x18,%esp
@@ -1731,54 +1674,26 @@ void sem_downs(struct semaphore* sem, int num )
  889:	8b 5d 08             	mov    0x8(%ebp),%ebx
  88c:	89 75 fc             	mov    %esi,-0x4(%ebp)
  88f:	8b 75 0c             	mov    0xc(%ebp),%esi
-	binary_sem_down(sem->S2);
  892:	8b 43 04             	mov    0x4(%ebx),%eax
  895:	89 04 24             	mov    %eax,(%esp)
  898:	e8 6b fb ff ff       	call   408 <binary_sem_down>
-	binary_sem_down(sem->S1);
  89d:	8b 03                	mov    (%ebx),%eax
  89f:	89 04 24             	mov    %eax,(%esp)
  8a2:	e8 61 fb ff ff       	call   408 <binary_sem_down>
-	sem->value -= num;
  8a7:	8b 43 08             	mov    0x8(%ebx),%eax
  8aa:	29 f0                	sub    %esi,%eax
-	if(sem->value > 0) {
  8ac:	85 c0                	test   %eax,%eax
-
-void sem_downs(struct semaphore* sem, int num )
-{
-	binary_sem_down(sem->S2);
-	binary_sem_down(sem->S1);
-	sem->value -= num;
  8ae:	89 43 08             	mov    %eax,0x8(%ebx)
-	if(sem->value > 0) {
  8b1:	74 0b                	je     8be <sem_downs+0x3e>
-		binary_sem_up(sem->S2);
  8b3:	8b 43 04             	mov    0x4(%ebx),%eax
  8b6:	89 04 24             	mov    %eax,(%esp)
  8b9:	e8 52 fb ff ff       	call   410 <binary_sem_up>
-	}
-	binary_sem_up(sem->S1);
  8be:	8b 03                	mov    (%ebx),%eax
-}
  8c0:	8b 75 fc             	mov    -0x4(%ebp),%esi
  8c3:	8b 5d f8             	mov    -0x8(%ebp),%ebx
-	binary_sem_down(sem->S1);
-	sem->value -= num;
-	if(sem->value > 0) {
-		binary_sem_up(sem->S2);
-	}
-	binary_sem_up(sem->S1);
  8c6:	89 45 08             	mov    %eax,0x8(%ebp)
-}
  8c9:	89 ec                	mov    %ebp,%esp
  8cb:	5d                   	pop    %ebp
-	binary_sem_down(sem->S1);
-	sem->value -= num;
-	if(sem->value > 0) {
-		binary_sem_up(sem->S2);
-	}
-	binary_sem_up(sem->S1);
  8cc:	e9 3f fb ff ff       	jmp    410 <binary_sem_up>
  8d1:	eb 0d                	jmp    8e0 <sem_down>
  8d3:	90                   	nop
@@ -1796,68 +1711,35 @@ void sem_downs(struct semaphore* sem, int num )
  8df:	90                   	nop
 
 000008e0 <sem_down>:
-	}
-	binary_sem_up(sem->S1);
-}
-
-void sem_down(struct semaphore* sem )
-{
  8e0:	55                   	push   %ebp
  8e1:	89 e5                	mov    %esp,%ebp
  8e3:	53                   	push   %ebx
  8e4:	83 ec 14             	sub    $0x14,%esp
  8e7:	8b 5d 08             	mov    0x8(%ebp),%ebx
-	binary_sem_down(sem->S2);
  8ea:	8b 43 04             	mov    0x4(%ebx),%eax
  8ed:	89 04 24             	mov    %eax,(%esp)
  8f0:	e8 13 fb ff ff       	call   408 <binary_sem_down>
-	binary_sem_down(sem->S1);
  8f5:	8b 03                	mov    (%ebx),%eax
  8f7:	89 04 24             	mov    %eax,(%esp)
  8fa:	e8 09 fb ff ff       	call   408 <binary_sem_down>
-	sem->value--;
  8ff:	8b 43 08             	mov    0x8(%ebx),%eax
  902:	83 e8 01             	sub    $0x1,%eax
-	if(sem->value > 0) {
  905:	85 c0                	test   %eax,%eax
-
-void sem_down(struct semaphore* sem )
-{
-	binary_sem_down(sem->S2);
-	binary_sem_down(sem->S1);
-	sem->value--;
  907:	89 43 08             	mov    %eax,0x8(%ebx)
-	if(sem->value > 0) {
  90a:	74 0b                	je     917 <sem_down+0x37>
-		binary_sem_up(sem->S2);
  90c:	8b 43 04             	mov    0x4(%ebx),%eax
  90f:	89 04 24             	mov    %eax,(%esp)
  912:	e8 f9 fa ff ff       	call   410 <binary_sem_up>
-	}
-	binary_sem_up(sem->S1);
  917:	8b 03                	mov    (%ebx),%eax
  919:	89 45 08             	mov    %eax,0x8(%ebp)
-}
  91c:	83 c4 14             	add    $0x14,%esp
  91f:	5b                   	pop    %ebx
  920:	5d                   	pop    %ebp
-	binary_sem_down(sem->S1);
-	sem->value--;
-	if(sem->value > 0) {
-		binary_sem_up(sem->S2);
-	}
-	binary_sem_up(sem->S1);
  921:	e9 ea fa ff ff       	jmp    410 <binary_sem_up>
  926:	8d 76 00             	lea    0x0(%esi),%esi
  929:	8d bc 27 00 00 00 00 	lea    0x0(%edi,%eiz,1),%edi
 
 00000930 <sem_ups>:
-	}
-	binary_sem_up(sem->S1);
-}
-
-void sem_ups(struct semaphore* sem, int num )
-{
  930:	55                   	push   %ebp
  931:	89 e5                	mov    %esp,%ebp
  933:	83 ec 18             	sub    $0x18,%esp
@@ -1865,54 +1747,21 @@ void sem_ups(struct semaphore* sem, int num )
  939:	8b 5d 08             	mov    0x8(%ebp),%ebx
  93c:	89 75 fc             	mov    %esi,-0x4(%ebp)
  93f:	8b 75 0c             	mov    0xc(%ebp),%esi
-	binary_sem_down(sem->S1);
  942:	8b 03                	mov    (%ebx),%eax
  944:	89 04 24             	mov    %eax,(%esp)
  947:	e8 bc fa ff ff       	call   408 <binary_sem_down>
-	sem->value+= num;
  94c:	03 73 08             	add    0x8(%ebx),%esi
-	if(sem->value == 1) {
  94f:	83 fe 01             	cmp    $0x1,%esi
-}
-
-void sem_ups(struct semaphore* sem, int num )
-{
-	binary_sem_down(sem->S1);
-	sem->value+= num;
  952:	89 73 08             	mov    %esi,0x8(%ebx)
-	if(sem->value == 1) {
  955:	74 19                	je     970 <sem_ups+0x40>
-		binary_sem_up(sem->S2);
-	}
-	binary_sem_up(sem->S1);
  957:	8b 03                	mov    (%ebx),%eax
-}
  959:	8b 75 fc             	mov    -0x4(%ebp),%esi
  95c:	8b 5d f8             	mov    -0x8(%ebp),%ebx
-	binary_sem_down(sem->S1);
-	sem->value+= num;
-	if(sem->value == 1) {
-		binary_sem_up(sem->S2);
-	}
-	binary_sem_up(sem->S1);
  95f:	89 45 08             	mov    %eax,0x8(%ebp)
-}
  962:	89 ec                	mov    %ebp,%esp
  964:	5d                   	pop    %ebp
-	binary_sem_down(sem->S1);
-	sem->value+= num;
-	if(sem->value == 1) {
-		binary_sem_up(sem->S2);
-	}
-	binary_sem_up(sem->S1);
  965:	e9 a6 fa ff ff       	jmp    410 <binary_sem_up>
  96a:	8d b6 00 00 00 00    	lea    0x0(%esi),%esi
-void sem_ups(struct semaphore* sem, int num )
-{
-	binary_sem_down(sem->S1);
-	sem->value+= num;
-	if(sem->value == 1) {
-		binary_sem_up(sem->S2);
  970:	8b 43 04             	mov    0x4(%ebx),%eax
  973:	89 04 24             	mov    %eax,(%esp)
  976:	e8 95 fa ff ff       	call   410 <binary_sem_up>
@@ -1920,116 +1769,50 @@ void sem_ups(struct semaphore* sem, int num )
  97d:	8d 76 00             	lea    0x0(%esi),%esi
 
 00000980 <sem_up>:
-	}
-	return ret;
-}
-
-void sem_up(struct semaphore* sem )
-{
  980:	55                   	push   %ebp
  981:	89 e5                	mov    %esp,%ebp
  983:	53                   	push   %ebx
  984:	83 ec 14             	sub    $0x14,%esp
  987:	8b 5d 08             	mov    0x8(%ebp),%ebx
-	binary_sem_down(sem->S1);
  98a:	8b 03                	mov    (%ebx),%eax
  98c:	89 04 24             	mov    %eax,(%esp)
  98f:	e8 74 fa ff ff       	call   408 <binary_sem_down>
-	sem->value++;
  994:	8b 43 08             	mov    0x8(%ebx),%eax
  997:	83 c0 01             	add    $0x1,%eax
-	if(sem->value == 1) {
  99a:	83 f8 01             	cmp    $0x1,%eax
-}
-
-void sem_up(struct semaphore* sem )
-{
-	binary_sem_down(sem->S1);
-	sem->value++;
  99d:	89 43 08             	mov    %eax,0x8(%ebx)
-	if(sem->value == 1) {
  9a0:	74 16                	je     9b8 <sem_up+0x38>
-		binary_sem_up(sem->S2);
-	}
-	binary_sem_up(sem->S1);
  9a2:	8b 03                	mov    (%ebx),%eax
  9a4:	89 45 08             	mov    %eax,0x8(%ebp)
-}
  9a7:	83 c4 14             	add    $0x14,%esp
  9aa:	5b                   	pop    %ebx
  9ab:	5d                   	pop    %ebp
-	binary_sem_down(sem->S1);
-	sem->value++;
-	if(sem->value == 1) {
-		binary_sem_up(sem->S2);
-	}
-	binary_sem_up(sem->S1);
  9ac:	e9 5f fa ff ff       	jmp    410 <binary_sem_up>
  9b1:	8d b4 26 00 00 00 00 	lea    0x0(%esi,%eiz,1),%esi
-void sem_up(struct semaphore* sem )
-{
-	binary_sem_down(sem->S1);
-	sem->value++;
-	if(sem->value == 1) {
-		binary_sem_up(sem->S2);
  9b8:	8b 43 04             	mov    0x4(%ebx),%eax
  9bb:	89 04 24             	mov    %eax,(%esp)
  9be:	e8 4d fa ff ff       	call   410 <binary_sem_up>
-	}
-	binary_sem_up(sem->S1);
  9c3:	8b 03                	mov    (%ebx),%eax
  9c5:	89 45 08             	mov    %eax,0x8(%ebp)
-}
  9c8:	83 c4 14             	add    $0x14,%esp
  9cb:	5b                   	pop    %ebx
  9cc:	5d                   	pop    %ebp
-	binary_sem_down(sem->S1);
-	sem->value++;
-	if(sem->value == 1) {
-		binary_sem_up(sem->S2);
-	}
-	binary_sem_up(sem->S1);
  9cd:	e9 3e fa ff ff       	jmp    410 <binary_sem_up>
  9d2:	8d b4 26 00 00 00 00 	lea    0x0(%esi,%eiz,1),%esi
  9d9:	8d bc 27 00 00 00 00 	lea    0x0(%edi,%eiz,1),%edi
 
 000009e0 <semaphore_create>:
-#include "stat.h"
-#include "user.h"
-#include "semaphore.h"
-
-struct semaphore* semaphore_create(int initial_semaphore_value)
-{
  9e0:	55                   	push   %ebp
  9e1:	89 e5                	mov    %esp,%ebp
  9e3:	83 ec 28             	sub    $0x28,%esp
-	struct semaphore* ret;
-	ret = malloc(sizeof(*ret));
  9e6:	c7 04 24 0c 00 00 00 	movl   $0xc,(%esp)
-#include "stat.h"
-#include "user.h"
-#include "semaphore.h"
-
-struct semaphore* semaphore_create(int initial_semaphore_value)
-{
  9ed:	89 5d f4             	mov    %ebx,-0xc(%ebp)
  9f0:	89 75 f8             	mov    %esi,-0x8(%ebp)
  9f3:	89 7d fc             	mov    %edi,-0x4(%ebp)
  9f6:	8b 7d 08             	mov    0x8(%ebp),%edi
-	struct semaphore* ret;
-	ret = malloc(sizeof(*ret));
  9f9:	e8 72 fd ff ff       	call   770 <malloc>
-	ret->value = initial_semaphore_value;
  9fe:	89 78 08             	mov    %edi,0x8(%eax)
-#include "semaphore.h"
-
-struct semaphore* semaphore_create(int initial_semaphore_value)
-{
-	struct semaphore* ret;
-	ret = malloc(sizeof(*ret));
  a01:	89 c3                	mov    %eax,%ebx
-	ret->value = initial_semaphore_value;
-	if(((ret->S1 = binary_sem_create()) + (ret->S2 = binary_sem_create())) < 0) {
  a03:	e8 f8 f9 ff ff       	call   400 <binary_sem_create>
  a08:	89 03                	mov    %eax,(%ebx)
  a0a:	89 c6                	mov    %eax,%esi
@@ -2037,18 +1820,10 @@ struct semaphore* semaphore_create(int initial_semaphore_value)
  a11:	01 c6                	add    %eax,%esi
  a13:	89 43 04             	mov    %eax,0x4(%ebx)
  a16:	78 20                	js     a38 <semaphore_create+0x58>
-		printf(2,"couldnt create the 2 binary semaphores");
-		return 0;
-	}
-	if(initial_semaphore_value == 0) {
  a18:	85 ff                	test   %edi,%edi
  a1a:	75 08                	jne    a24 <semaphore_create+0x44>
-		binary_sem_down(ret->S2);
  a1c:	89 04 24             	mov    %eax,(%esp)
  a1f:	e8 e4 f9 ff ff       	call   408 <binary_sem_down>
-	}
-	return ret;
-}
  a24:	89 d8                	mov    %ebx,%eax
  a26:	8b 75 f8             	mov    -0x8(%ebp),%esi
  a29:	8b 5d f4             	mov    -0xc(%ebp),%ebx
@@ -2058,18 +1833,11 @@ struct semaphore* semaphore_create(int initial_semaphore_value)
  a32:	c3                   	ret    
  a33:	90                   	nop
  a34:	8d 74 26 00          	lea    0x0(%esi,%eiz,1),%esi
-{
-	struct semaphore* ret;
-	ret = malloc(sizeof(*ret));
-	ret->value = initial_semaphore_value;
-	if(((ret->S1 = binary_sem_create()) + (ret->S2 = binary_sem_create())) < 0) {
-		printf(2,"couldnt create the 2 binary semaphores");
  a38:	c7 44 24 04 dc 0c 00 	movl   $0xcdc,0x4(%esp)
  a3f:	00 
  a40:	31 db                	xor    %ebx,%ebx
  a42:	c7 04 24 02 00 00 00 	movl   $0x2,(%esp)
  a49:	e8 82 fa ff ff       	call   4d0 <printf>
-		return 0;
  a4e:	eb d4                	jmp    a24 <semaphore_create+0x44>
 
 00000a50 <semaphore_release_atomic>:
