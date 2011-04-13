@@ -21,7 +21,7 @@ printf(1, "Process %d Thread %d is running.\n", pid, tid);
 binary_sem_up(binsem);
 sleep(1);
 //}
-thread_exit(130);
+thread_exit(0);
 return 0;
 }
 
@@ -68,7 +68,6 @@ tid[i] = thread_create(thread_loop ,ustack, STK_SIZE);
 }
 for(i=0;i<n;i++) {
 thread_join(tid[i],lol);
-printf(1,"%d",*lol);
 }
 }
 }
