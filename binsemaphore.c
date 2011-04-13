@@ -95,7 +95,6 @@ int binary_sem_up(int binary_sem_id) {
 }
 
 int binary_sem_clear(int binary_sem_id) {
-	int i;
 	acquire(&bstbl.lock);
 
 	if((binary_sem_id >= BSEMCOUNT) || (binary_sem_id < 0)) {//invalid id
@@ -104,7 +103,7 @@ int binary_sem_clear(int binary_sem_id) {
 	if(bstbl.bsem[binary_sem_id].used == 0) {//nothing to clear
 		return 0;
 	}
-	bstbl.bsem[i].used = 0;
+	bstbl.bsem[binary_sem_id].used = 0;
 	release(&bstbl.lock);
 	return 0;
 }

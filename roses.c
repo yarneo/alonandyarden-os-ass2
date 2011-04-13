@@ -24,6 +24,7 @@ int B,H,R,C,totalRequests;
 int binsem_wake_busboy; //lock on the waking and sleeping of the busboy to clean the cups
 int binsem_on_cups_array; //lock on the array of cups
 int filedes; //file descriptor of the log file
+int binsem_printing; //synchronizing the print
 
 Cup* getCleanCup() {
 	return (Cup*)semaphore_pop(CBB);
@@ -32,7 +33,6 @@ Cup* getCleanCup() {
 int washCups() {
 	int i;
 	int counter = 0;
-	binary_sem_down(binsem_on_cups_array);
 	for(i=0;(i<C && counter<((int)(C*0.85)));i++) {
 		if(cups[i].clean != 1) {
 			cups[i].clean = 1;
@@ -42,7 +42,6 @@ int washCups() {
 			counter++;
 			semaphore_put(CBB,(void*)(&cups[i]));
 		}
-		binary_sem_up(binsem_on_cups_array);
 	}
 	if(counter != ((int)(C*0.85))) {
 		printf(2,"less or more than 85% cups!! percentage is: %d",((int)(counter*0.85)));
@@ -72,10 +71,24 @@ bartender() {
 			binary_sem_up(binsem_wake_busboy);
 		}
 		binary_sem_up(binsem_counter_dirty_cups);
+		binary_sem_down(binsem_printing);
 		printf(filedes,"Bartender %d completed request #%d\n",thread_getid(),req->id);
+		binary_sem_up(binsem_printing);
 		if(req->id == totalRequests) {
+			//clean all of it!
+			free(req);
+			free(cups);
+			semaphore_clear(RBB);
+			semaphore_clear(CBB);
+			binary_sem_clear(binsem_counter_dirty_cups);
+			binary_sem_clear(binsem_counter_requests);
+			binary_sem_clear(binsem_wake_busboy);
+			binary_sem_clear(binsem_on_cups_array);
+			binary_sem_clear(binsem_printing);
+			//
                     exit_all_threads();//need to leave the main process on so he can do thread_join
 		}
+		free(req);
 		sleep(10);
 	}
 }
@@ -84,11 +97,15 @@ void*
 hostess() {
 	while(requests < totalRequests) {
 		binary_sem_down(binsem_counter_requests);
+		if(requests < totalRequests) {
 		Request* req = malloc(sizeof(Request));
 		requests++;
 		req->id = requests;
+		binary_sem_down(binsem_printing);
 		printf(filedes,"Hostess %d added a new request #%d\n",thread_getid(),req->id);
+		binary_sem_up(binsem_printing);
 		addNewRequest(req);
+		}
 		binary_sem_up(binsem_counter_requests);
 		sleep(10);
 	}
@@ -105,7 +122,18 @@ busboy() {
 			printf(2,"problem with the washing of cups");
 			exit();
 		}
+		binary_sem_down(binsem_printing);
 		printf(filedes,"Busboy %d added %d clean cups.\n",thread_getid(),(int)(C*0.85));
+		binary_sem_up(binsem_printing);
+	}
+}
+
+void*
+printout() {
+	printf(1,"Processing");
+	while(1) {
+		printf(1,".");
+		sleep(50);
 	}
 }
 
@@ -202,7 +230,7 @@ int main() {
 	void* ustack;
 	readFromFile();
 	//printf(1,"%d %d %d %d %d\n",B,H,R,C,totalRequests);
-	filedes = open("ss2_log.txt",(O_WRONLY | O_CREATE));
+	filedes = open("ass2_log.txt",(O_WRONLY | O_CREATE));
 	if(filedes < 0) {
 		printf(2,"problem opening file\n");
 		exit();
@@ -217,6 +245,7 @@ int main() {
 	binsem_counter_requests = binary_sem_create();
 	binsem_wake_busboy = binary_sem_create();
 	binsem_on_cups_array = binary_sem_create();
+	binsem_printing = binary_sem_create();
 	binary_sem_down(binsem_wake_busboy);
 
 	cups = malloc(sizeof(Cup) * C);
@@ -226,27 +255,31 @@ int main() {
 		semaphore_put(CBB, (void*)(&(cups[i])));
 	}
 
-	int tid[B+H+1];
-	for(i=0;i<(B+H+1);i++) {
+	int tid[B+H+2];
+	for(i=0;i<(B+H+2);i++) {
 		if((ustack = malloc(STK_SIZE)) <= 0) {
 			printf(2,"cant malloc the stack for the thread\n");
 			exit();
 		}
 		else {
 			if(i<B) {
-				tid[i] = thread_create(bartender ,ustack, STK_SIZE);
+				tid[i] = thread_create(bartender, ustack, STK_SIZE);
 			}
 			else if((i>=B) && (i<(B+H))) {
-				tid[i] = thread_create(hostess ,ustack, STK_SIZE);
+				tid[i] = thread_create(hostess, ustack, STK_SIZE);
+			}
+			else if(i==(B+H)){
+				tid[i] = thread_create(busboy, ustack, STK_SIZE);
 			}
 			else {
-				tid[i] = thread_create(busboy ,ustack, STK_SIZE);
+				tid[i] = thread_create(printout, ustack, STK_SIZE);
 			}
 		}
 	}
-	for(i=0;i<(B+H+1);i++) {
+	for(i=0;i<(B+H+2);i++) {
 		thread_join(tid[i],0);
 	}
 	close(filedes);
+	printf(1,"\n");
 	exit();
 }

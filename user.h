@@ -27,10 +27,10 @@ int binary_sem_down(int);
 int binary_sem_up(int);
 int binary_sem_clear(int);
 int thread_create(void*() ,void*, uint);
-void thread_exit(int);
+void thread_exit(void*);
 int thread_join(int, void*);
 int thread_getid(void);
-int thread_getProcid(void);
+int thread_getProcId(void);
 int exit_all_threads(void);
 
 // ulib.c
@@ -59,3 +59,4 @@ void semaphore_put(struct BB* bb, void* element);
 void* semaphore_pop(struct BB* bb);
 void semaphore_put_atomic(struct BB* bb, void* element);
 void semaphore_release_atomic();
+void semaphore_clear(struct BB* bb);

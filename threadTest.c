@@ -10,9 +10,9 @@ thread_loop()
 {
 int i;
 int pid,tid;
-pid = thread_getProcid();
+pid = thread_getProcId();
 tid = thread_getid();
-//while(1) {
+while(1) {
 binary_sem_down(binsem);
 for(i=0;i<3;i++)
 {
@@ -20,7 +20,7 @@ printf(1, "Process %d Thread %d is running.\n", pid, tid);
 }
 binary_sem_up(binsem);
 sleep(1);
-//}
+}
 thread_exit(0);
 return 0;
 }

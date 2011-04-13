@@ -100,7 +100,7 @@ extern int sys_write(void);
 extern int sys_uptime(void);
 extern int sys_thread_create(void);
 extern int sys_thread_getid(void);
-extern int sys_thread_getProcid(void);
+extern int sys_thread_getProcId(void);
 extern int sys_thread_join(void);
 extern int sys_thread_exit(void);
 extern int sys_binary_sem_create(void);
@@ -133,7 +133,7 @@ static int (*syscalls[])(void) = {
 [SYS_uptime]  sys_uptime,
 [SYS_thread_create] sys_thread_create,
 [SYS_thread_getid] sys_thread_getid,
-[SYS_thread_getProcid] sys_thread_getProcid,
+[SYS_thread_getProcId] sys_thread_getProcId,
 [SYS_thread_join] sys_thread_join,
 [SYS_thread_exit] sys_thread_exit,
 [SYS_binary_sem_create] sys_binary_sem_create,

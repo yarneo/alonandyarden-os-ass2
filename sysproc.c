@@ -47,7 +47,7 @@ sys_thread_getid(void)
 }
 
 int
-sys_thread_getProcid(void)
+sys_thread_getProcId(void)
 {
     return proc->pid;
 }
